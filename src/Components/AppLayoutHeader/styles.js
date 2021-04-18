@@ -3,6 +3,15 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 
 
 export const useStyles = makeStyles((theme) => ({
+    logo:{
+        width: 50,
+         marginTop: 10,
+          marginRight: 20,
+          [theme.breakpoints.down('md')]: {
+            width: 40,
+            // marginLeft:-20
+        },
+    },
     grow: {
         flexGrow: 1,
     },
@@ -25,6 +34,9 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(3),
         },
+         [theme.breakpoints.down('md')]: {
+            marginRight:-20,
+         },
     },
     searchIcon: {
         padding: theme.spacing(0, 2),
@@ -43,9 +55,11 @@ export const useStyles = makeStyles((theme) => ({
         // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
-        width: 200,
-        [theme.breakpoints.up('md')]: {
+         [theme.breakpoints.up('md')]: {
             width: '80ch',
+        },
+        [theme.breakpoints.down('md')]: {
+            width: '20ch',
         },
         backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {

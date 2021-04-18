@@ -48,7 +48,7 @@ const AppLayoutHeader = () => {
       <AppBar position="fixed" color="secondary">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            <img src={Logo} style={{ width: 50, marginTop: 10, marginRight: 20 }} />
+            <img src={Logo}  className={classes.logo} />
           </Typography>
           <div style={{ flex: 1 }}>
             <div className={classes.search}>
