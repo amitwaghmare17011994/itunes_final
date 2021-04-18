@@ -23,16 +23,13 @@ const HomePage = () => {
   }, [])
 
   const onScrollHandler = async (e) => {
-    console.warn('ska');
     const scrollHeight = e.target.scrollHeight;
     const scrollTop = e.target.scrollTop
     const clientHeight = e.target.clientHeight
     const condition1 = parseInt((parseInt(scrollHeight) - parseInt(scrollTop))) === parseInt(clientHeight)
     const condition2 = parseInt((parseInt(scrollHeight) - parseInt(scrollTop)) + 1) === parseInt(clientHeight)
     const condition3 = parseInt((parseInt(scrollHeight) - parseInt(scrollTop)) - 1) === parseInt(clientHeight)
-
     const isBottom = condition1 || condition2 || condition3
-    console.warn({ isBottom });
     if (isBottom) {
       setShowBottomLoader(true)
       const songsRespnse = await getSongs(songFilter || dummyFavSong, currentOffset + 1)
@@ -48,7 +45,7 @@ const HomePage = () => {
       <div onScroll={onScrollHandler} style={{ overflowY: 'auto', maxHeight: '100vh' }}>
         <Body songs={songs} />
         {showBottomLoader &&
-          <center style={{marginBottom:20,height:50}}>
+          <center style={{ marginBottom: 20, height: 50 }}>
             <CircularProgress color="secondary" />
           </center>
         }

@@ -39,34 +39,27 @@ const Body = (props) => {
         }
     }
 
-
     return (
         <div style={{ marginTop: 80 }} >
-            <Grid
+            {!!songs?.length && <Grid
                 container
                 direction="row"
                 justify="center"
-                
-            >
 
-                {songs?.length ?
-                    songs.map((songItem) =>
-                        <Grid onClick={() => {
-                            onSongSelected(songItem)
-                        }
-                        } item xs={12} md={2} style={{ margin: 20 }} key={songItem.artistId} >
-                            <SongCard
-                                isPlaying={selectedSongToPlay?.previewUrl === songItem?.previewUrl}
-                                onSongPlay={onSongPlayHandler}
-                                song={songItem} />
-                        </Grid>
-                    )
-                    :
-                    <center>
-                        Not Found
-                    </center>
-                }
-            </Grid>
+            >
+                {songs?.map((songItem) =>
+                    <Grid onClick={() => {
+                        onSongSelected(songItem)
+                    }
+                    } item xs={12} md={2} style={{ margin: 20 }} key={songItem.artistId} >
+                        <SongCard
+                            isPlaying={selectedSongToPlay?.previewUrl === songItem?.previewUrl}
+                            onSongPlay={onSongPlayHandler}
+                            song={songItem} />
+                    </Grid>
+                )}
+
+            </Grid>}
             {selectedSongToOpen && <FullScreenDialog
                 open={selectedSongToOpen}
                 song={selectedSongToOpen}
