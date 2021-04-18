@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Grid } from '@material-ui/core'
 import SongCard from '@components/SongCard'
-import FullScreenDialog from '../../Components/FullScreenDialog'
+import FullScreenDialog from '@components/FullScreenDialog'
 
 const Body = (props) => {
-    const { songs = [] } = props
+    const { songs = null } = props
     const [selectedSongToOpen, setSelectedSongToOpen] = useState(null)
     const [selectedSongToPlay, setSelectedSongToPlay] = useState(null)
     const [playingSongInstance, setplayingSongInstance] = useState(null)
@@ -41,22 +41,30 @@ const Body = (props) => {
 
 
     return (
-        <div style={{ marginTop: 80 }}>
+        <div style={{ marginTop: 80 }} >
             <Grid
                 container
                 direction="row"
                 justify="center"
+                
             >
+
                 {songs?.length ?
-                    songs.map((songItem) => !!songItem.collectionName &&
+                    songs.map((songItem) =>
                         <Grid onClick={() => {
                             onSongSelected(songItem)
                         }
-                        } item xs={12} md={2} style={{ margin: 20 }} key={songItem?.previewUrl} >
-                            <SongCard isPlaying={selectedSongToPlay?.previewUrl === songItem?.previewUrl} onSongPlay={onSongPlayHandler} song={songItem} />
+                        } item xs={12} md={2} style={{ margin: 20 }} key={songItem.artistId} >
+                            <SongCard
+                                isPlaying={selectedSongToPlay?.previewUrl === songItem?.previewUrl}
+                                onSongPlay={onSongPlayHandler}
+                                song={songItem} />
                         </Grid>
                     )
-                    : 'Not Found'
+                    :
+                    <center>
+                        Not Found
+                    </center>
                 }
             </Grid>
             {selectedSongToOpen && <FullScreenDialog
@@ -65,6 +73,7 @@ const Body = (props) => {
                 onClose={() => onSongSelected(null)}
                 onSongPlay={onSongPlayHandler}
             />}
+
         </div>
     )
 }

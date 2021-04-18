@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import Logo from '@images/logo.png'
-import { songsState } from '@atoms/songAtom';
+import { songsState,songFilterState } from '@atoms/songAtom';
 import { useRecoilState } from 'recoil'
 import { useStyles } from './styles'
 import { getSongs } from '../../Apis/songsApi';
@@ -20,7 +20,7 @@ let timer;
 const AppLayoutHeader = () => {
   const classes = useStyles();
   const [songs, setSongs] = useRecoilState(songsState);
-
+  const [songFilter,setSongFilter]=useRecoilState(songFilterState)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const history = useHistory()
@@ -33,6 +33,7 @@ const AppLayoutHeader = () => {
     timer = setTimeout(() => searchSong(term || dummyFavSong), 1000)
   }
   const searchSong = async (term) => {
+    setSongFilter(term)
     const songs = await getSongs(term)
     setSongs(songs)
   }

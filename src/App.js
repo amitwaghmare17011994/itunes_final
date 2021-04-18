@@ -35,7 +35,9 @@ export default function App() {
     < >
       <ThemeProvider theme={theme}>
         <RecoilRoot>
-          <Routes />
+          <div style={{ overflowY: 'hidden' ,maxHeight:'100vh'}}>
+            <Routes />
+          </div>
         </RecoilRoot>
       </ThemeProvider>
     </>
