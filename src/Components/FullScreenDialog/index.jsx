@@ -11,6 +11,7 @@ import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import { PauseCircleFilled } from "@material-ui/icons";
 import { useStyles } from "./styles";
 import { Paper, Slider } from "@material-ui/core";
+import { useEffect } from "react";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -24,6 +25,7 @@ export default function FullScreenDialog(props) {
     onSongPlay,
     songPosition,
     onSongPositionChange,
+    minMax,
   } = props;
   const [isPlay, setIsPlay] = useState(true);
   const classes = useStyles();
@@ -32,6 +34,12 @@ export default function FullScreenDialog(props) {
     onClose();
   };
 
+  useEffect(() => {
+    if (songPosition && songPosition === minMax.max) {
+      setIsPlay(false);
+      onSongPositionChange(0);
+    }
+  }, [songPosition, minMax]);
   const onClickPlay = () => {
     onSongPlay(song, !isPlay);
     setIsPlay(!isPlay);
@@ -98,6 +106,8 @@ export default function FullScreenDialog(props) {
                   marginRight: 10,
                   width: "70%",
                 }}
+                min={minMax.min}
+                max={minMax.max}
                 value={songPosition}
                 onChange={(e, newValue) => {
                   onSongPositionChange(newValue);
