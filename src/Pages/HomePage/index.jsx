@@ -6,7 +6,7 @@ import { songsState, songsFilterSelector } from '@atoms/songAtom'
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Body from './Body';
 import { CircularProgress } from '@material-ui/core';
-const dummyFavSong = 'do pal'
+const dummyFavSong = 'kk'
 const HomePage = () => {
   const [songs, setSongs] = useRecoilState(songsState);
   const [currentOffset, setCurrentOffset] = useState(0)

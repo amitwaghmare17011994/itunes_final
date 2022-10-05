@@ -37,9 +37,12 @@ export const useStyles = makeStyles((theme) => {
         },
         controls: {
             display: 'flex',
-            alignItems: 'center',
+            // alignItems: 'center',
             width: '100%',
-            backgroundColor: theme.palette.primary.main
+            flexDirection:'column',
+            backgroundColor: theme.palette.primary.main,
+            padding:10
+            
         },
         playIcon: {
             height: 38,
