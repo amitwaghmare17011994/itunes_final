@@ -1,8 +1,8 @@
-import { Container, Typography } from "@material-ui/core";
+import { CircularProgress, Container, Typography } from "@material-ui/core";
 import { ErrorOutlineOutlined } from "@material-ui/icons";
 import React from "react";
 
-function NotFound() {
+function NotFound(props) {
   return (
     <Container
       style={{
@@ -16,11 +16,17 @@ function NotFound() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems:'center'
+          alignItems: "center",
         }}
       >
-        <ErrorOutlineOutlined style={{fontSize:100}}/>
-        <Typography style={{fontSize:24}}>No Results Found</Typography>
+        {props.showLoader ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <ErrorOutlineOutlined style={{ fontSize: 100 }} />
+            <Typography style={{ fontSize: 24 }}>No Results Found</Typography>
+          </>
+        )}
       </div>
     </Container>
   );

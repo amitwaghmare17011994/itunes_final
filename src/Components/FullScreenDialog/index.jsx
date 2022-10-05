@@ -35,9 +35,9 @@ export default function FullScreenDialog(props) {
   };
 
   useEffect(() => {
-    if (songPosition && songPosition === minMax.max) {
+      if (songPosition && songPosition === minMax.max) {
       setIsPlay(false);
-      onSongPositionChange(0);
+      onSongPositionChange(0)
     }
   }, [songPosition, minMax]);
   const onClickPlay = () => {

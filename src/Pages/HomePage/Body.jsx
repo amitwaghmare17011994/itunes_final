@@ -94,7 +94,8 @@ const Body = (props) => {
           ))}
         </Grid>
       ) : (
-        <NotFound />
+        <NotFound showLoader={songs===null}/>
+        
       )}
       {selectedSongToOpen && (
         <FullScreenDialog
