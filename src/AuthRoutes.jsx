@@ -4,12 +4,12 @@ import HomePage from "@pages/HomePage";
 import LoginPage from "@pages/LoginPage";
 import PageNotFound from "./Pages/PageNotFound";
 
-const Routes = () => {
+const AuthRoutes = () => {
   return (
     <Router>
       <Switch>
         <Route path="/" exact>
-          <HomePage />
+          <LoginPage />
         </Route>
         <Route>
           <PageNotFound />
@@ -18,4 +18,4 @@ const Routes = () => {
     </Router>
   );
 };
-export default Routes;
+export default AuthRoutes;
