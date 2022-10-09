@@ -18,6 +18,7 @@ const HomePage = () => {
     (async () => {
       const songsRespnse = await getSongs(songFilter || dummyFavSong)
       document.getElementById('main').scrollTo(0,0);
+      setSongs([])
       setSongs(songsRespnse)
     }
     )()
