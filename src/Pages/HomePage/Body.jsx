@@ -4,6 +4,7 @@ import SongCard from "@components/SongCard";
 import FullScreenDialog from "@components/FullScreenDialog";
 import NotFound from "../../Components/NotFound";
 import { useEffect } from "react";
+import { useStyles } from "./styles";
 
 const Body = (props) => {
   const { songs = null } = props;
@@ -15,6 +16,7 @@ const Body = (props) => {
 
   const [realTime, setRealTime] = useState(false);
   const countRef = useRef(songPosition);
+  const classes = useStyles();
   countRef.current = songPosition;
   let interval;
 
@@ -39,14 +41,16 @@ const Body = (props) => {
   };
 
   const onSongPlayHandler = (songItem, isPlay) => {
-    if (playingSongInstance) {
-      playingSongInstance.pause();
-      playingSongInstance.remove();
-    }
     if (isPlay) {
       const audio = new Audio(songItem.previewUrl);
-      audio.load();
-      audio.play();
+      if (!playingSongInstance) {
+        audio.play();
+      } else {
+        playingSongInstance.play();
+        setSongPosition(playingSongInstance.currentTime);
+        return;
+      }
+
       setTimeout(() => {
         setMinMax({ min: 0, max: audio.duration });
         setplayingSongInstance(audio);
@@ -60,7 +64,6 @@ const Body = (props) => {
   const pauseSong = () => {
     if (playingSongInstance) {
       playingSongInstance.pause();
-      playingSongInstance.remove();
     }
   };
 
@@ -69,7 +72,7 @@ const Body = (props) => {
     setSongPosition(value);
   };
   return (
-    <div style={{ marginTop: 80 }}>
+    <div className={classes.container}>
       {!!songs?.length ? (
         <Grid container direction="row" justify="center">
           {songs?.map((songItem) => (
@@ -80,7 +83,8 @@ const Body = (props) => {
               }}
               item
               xs={12}
-              md={2}
+              md={12}
+              lg={3}
               style={{ margin: 20 }}
             >
               <SongCard
@@ -94,8 +98,7 @@ const Body = (props) => {
           ))}
         </Grid>
       ) : (
-        <NotFound showLoader={songs===null}/>
-        
+        <NotFound showLoader={songs === null} />
       )}
       {selectedSongToOpen && (
         <FullScreenDialog

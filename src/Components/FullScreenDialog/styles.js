@@ -1,10 +1,22 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {
+    makeStyles
+} from '@material-ui/core/styles';
 
 
 export const useStyles = makeStyles((theme) => {
     return ({
+        flex: {
+            display: 'flex',
+            flexDirection: 'column'
+        },
+        toolbar: {
+            // [theme.breakpoints.down("md")]: {
+            //     height: 150
+            // }
+        },
         appBar: {
             position: 'relative',
+
         },
         title: {
             marginLeft: theme.spacing(2),
@@ -26,7 +38,7 @@ export const useStyles = makeStyles((theme) => {
             height: 200
         },
         songImg: {
-            width: 800,
+            width: '100%',
             height: '100%'
         },
         controlPanel: {
@@ -39,15 +51,19 @@ export const useStyles = makeStyles((theme) => {
             display: 'flex',
             // alignItems: 'center',
             width: '100%',
-            flexDirection:'column',
+            flexDirection: 'column',
             backgroundColor: theme.palette.primary.main,
-            padding:10
-            
+            padding: 10
+
         },
         playIcon: {
-            height: 38,
-            width: 38,
-            color: 'white'
+            fontSize: 40,
+            color: 'white',
+            // [theme.breakpoints.down("md")]: {
+            //     height: 150,
+            //     fontSize: 120,
+
+            // }
         },
         songDetails: {
             color: "white",
@@ -67,8 +83,15 @@ export const useStyles = makeStyles((theme) => {
             margin: 20
         },
         detailCont: {
-            display: 'flex', maxHeight: '93vh', height: '93vh',
-            overflow: 'hidden'
+            display: 'flex',
+            overflow: 'hidden',
+            height: '100%',
+            width: '100%'
+        },
+        slider:{
+            color: "white",
+            margin: 10,
+            width: "90%",
         }
     })
 });

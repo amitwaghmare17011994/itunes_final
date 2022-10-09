@@ -45,16 +45,18 @@ const AppLayoutHeader = () => {
     setAnchorEl(null);
   };
   return (
-    <div className={classes.grow}>
-      <AppBar position="fixed" color="secondary">
-        <Toolbar>
+    // <div className={classes.grow}>
+      <AppBar position="fixed" color="secondary" className={classes.appBar}>
+        <Toolbar className={classes.toolbar}>
           <Typography className={classes.title} variant="h6" noWrap>
             <img src={Logo} className={classes.logo} />
           </Typography>
           <div style={{ flex: 1 }}>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
-                <SearchIcon />
+                <SearchIcon
+                className={classes.searchIconImg}
+                 />
               </div>
               <InputBase
                 placeholder="Search…"
@@ -75,8 +77,11 @@ const AppLayoutHeader = () => {
               aria-haspopup="true"
               onClick={handleMenu}
               color="inherit"
-            >
-              <AccountCircle />
+             >
+              <AccountCircle 
+                            className={classes.account}
+
+              />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -93,20 +98,29 @@ const AppLayoutHeader = () => {
               open={open}
               onClose={handleClose}
             >
-              <MenuItem>Profile</MenuItem>
+              <MenuItem>
+              <Typography variant="h6">
+                Profile
+                </Typography>
+              </MenuItem>
+              
               <MenuItem
                 onClick={() => {
                   Cookies.remove("user");
-                  history.push("/");
+                  window.location.reload()
+
                 }}
               >
+                
+                <Typography variant="h6">
                 Logout
+                </Typography>
               </MenuItem>
             </Menu>
           </div>
         </Toolbar>
       </AppBar>
-    </div>
+    // </div>
   );
 };
 

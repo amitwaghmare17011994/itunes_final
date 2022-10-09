@@ -10,14 +10,17 @@ import Banner from "@images/banner.jpeg";
 import Logo from "@images/logo.png";
 import { useFormik } from "formik";
 import { loginSchema } from "./helper";
-import { FormHelperText } from "@material-ui/core";
+import { FormHelperText, useMediaQuery, useTheme } from "@material-ui/core";
 import { loginUser } from "../../Utils";
 import Cookies from "js-cookie";
+import "./styles.css";
 
 const LoginPage = (props) => {
   const classes = useStyles();
   const history = useHistory();
   const { width } = props;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   useEffect(() => {
     if (Cookies.get("user")) {
@@ -26,7 +29,8 @@ const LoginPage = (props) => {
   }, []);
   const onLoginHandler = () => {
     loginUser(values.email);
-    history.push("/");
+    // history.push("/");
+    window.location.reload();
   };
 
   const formik = useFormik({
@@ -38,7 +42,7 @@ const LoginPage = (props) => {
     validationSchema: loginSchema,
   });
   const { values, errors, handleChange, handleSubmit, setFieldValue } = formik;
-  return (
+   return (
     <div className={classes.container}>
       <Hidden xsDown mdDown>
         <div className={classes.banner}>
@@ -47,9 +51,9 @@ const LoginPage = (props) => {
       </Hidden>
 
       <div className={classes.paper}>
-        <img src={Logo} style={{ width: 176 }} />
+        <img src={Logo} className={classes.img} />
         <br />
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h6">
           Sign in
         </Typography>
         <form className={classes.form} noValidate>
@@ -58,16 +62,19 @@ const LoginPage = (props) => {
             margin="normal"
             required
             fullWidth
-            label="Email Address"
+            // label="Email Address"
             autoFocus
             inputProps={{
               autoComplete: "off",
+              placeholder: "Email Address",
+               
             }}
             color="secondary"
             error={errors.email}
             onChange={(e) => {
-              setFieldValue("email", e.target.value);
+              setFieldValue("email", e.target.value.trim());
             }}
+            className={classes.inputField}
           />
           <FormHelperText className={classes.error}>
             {errors.email}
@@ -78,15 +85,17 @@ const LoginPage = (props) => {
             margin="normal"
             required
             fullWidth
-            label="Password"
+            // label="Password"
             type="password"
             inputProps={{
               autoComplete: "new-password",
+              
+              placeholder: "Password",
             }}
             color="secondary"
             error={errors.password}
             onChange={(e) => {
-              setFieldValue("password", e.target.value);
+              setFieldValue("password", e.target.value.trim());
             }}
           />
           <FormHelperText className={classes.error}>
