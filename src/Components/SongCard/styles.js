@@ -1,23 +1,32 @@
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {
+    makeStyles,
+    useTheme
+} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-    img:{
+    title: {
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+    },
+    img: {
         zIndex: 1,
         height: "inherit"
     },
     root: {
         display: 'flex',
+        borderRadius: 10,
         [theme.breakpoints.down('md')]: {
 
-        // marginTop:40
+            // marginTop:40
+        },
+        cursor: 'pointer',
     },
-        cursor:'pointer',
-     },
     details: {
         display: 'flex',
         width: '100%',
         flexDirection: 'column',
-         position: "relative",
+        position: "relative",
         //  [theme.breakpoints.down('md')]: {
 
         // minHeight:900
@@ -27,21 +36,25 @@ export const useStyles = makeStyles((theme) => ({
         flex: '1 0 auto',
     },
     cover: {
-        width: '100%',
+        // width: '100%',
         // height: 1800,
-        minHeight:400
-      },
+        minHeight: 400
+    },
     controls: {
         display: 'flex',
         alignItems: 'center',
         paddingLeft: theme.spacing(1),
         paddingBottom: theme.spacing(1),
-        justifyContent:'center',
+        justifyContent: 'center',
     },
     playIcon: {
-        
+        backgroundColor: '#d73a2e',
+        padding: 20,
+        fontSize: 30,
+        borderRadius: 40,
+        color: 'white'
         // [theme.breakpoints.down('md')]: {
-           
+
         //     fontSize: 100     
         // },
     },

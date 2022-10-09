@@ -28,33 +28,37 @@ export default function SongCard(props) {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} raised>
       <div className={classes.details}>
         <CardMedia
           className={classes.cover}
-          image={song.artworkUrl100}
-           title="Live from space album cover"
+          image={song?.artworkUrl100}
+          title="Live from space album cover"
         />
         {/* <img
-                src={song.artworkUrl100}
+                src={song?.artworkUrl100}
                 style={{width:'100%',height:'90%'}}
                 /> */}
         <CardContent className={classes.content}>
-          <Typography component="h5" variant="h6">
-            {song.collectionName}
+          <Typography component="h5" variant="h6" className={classes.title}>
+            {song?.collectionName}
           </Typography>
-          <Typography variant="h6" color="textSecondary">
-            {song.artistName}
+          <Typography
+            variant="h6"
+            color="textSecondary"
+            className={classes.title}
+          >
+            {song?.artistName}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-          <IconButton aria-label="previous">
+          {/* <IconButton aria-label="previous">
             {theme.direction === "rtl" ? (
               <SkipNextIcon className={classes.playIcon} />
             ) : (
               <SkipPreviousIcon className={classes.playIcon} />
             )}
-          </IconButton>
+          </IconButton> */}
           <IconButton aria-label="play/pause" onClick={onClickPlay}>
             {isPlay ? (
               <PauseCircleFilled className={classes.playIcon} />
@@ -62,13 +66,13 @@ export default function SongCard(props) {
               <PlayArrowIcon className={classes.playIcon} />
             )}
           </IconButton>
-          <IconButton aria-label="next">
+          {/* <IconButton aria-label="next">
             {theme.direction === "rtl" ? (
               <SkipPreviousIcon className={classes.playIcon} />
             ) : (
               <SkipNextIcon className={classes.playIcon} />
             )}
-          </IconButton>
+          </IconButton> */}
         </div>
       </div>
     </Card>

@@ -35,14 +35,34 @@ const Body = (props) => {
   }, [playingSongInstance, playingSongInstance?.paused, songPosition]);
 
   const onSongSelected = (song) => {
-    setSongPosition(0);
-    setSelectedSongToOpen(song);
-    onSongPlayHandler(song, !!song);
+    if (playingSongInstance) {
+      playingSongInstance.pause();
+      setplayingSongInstance(null);
+    }
+
+    if (selectedSongToPlay) {
+      setSelectedSongToPlay(null);
+    }
+    // setSelectedSongToOpen(song);
+    setTimeout(() => {
+      setSongPosition(0);
+      setSelectedSongToOpen(song);
+      onSongPlayHandler(song, !!song, true);
+    }, 300);
   };
 
-  const onSongPlayHandler = (songItem, isPlay) => {
+  const onSongPlayHandler = (songItem, isPlay, makeReturn = false) => {
     if (isPlay) {
       const audio = new Audio(songItem.previewUrl);
+      if (makeReturn) {
+        audio.play();
+        setTimeout(() => {
+          setMinMax({ min: 0, max: audio.duration });
+          setplayingSongInstance(audio);
+          setSelectedSongToPlay(songItem);
+        }, 1000);
+        return;
+      }
       if (!playingSongInstance) {
         audio.play();
       } else {
@@ -61,6 +81,21 @@ const Body = (props) => {
     }
   };
 
+  const onSingleCardPlay = (songItem, isPlay) => {
+    if (isPlay) {
+      if (playingSongInstance) {
+        playingSongInstance.pause();
+      }
+      const audio = new Audio(songItem.previewUrl);
+      audio.play();
+      setplayingSongInstance(audio);
+      setSelectedSongToPlay(songItem);
+    } else {
+      setSelectedSongToPlay(null);
+      pauseSong();
+    }
+  };
+
   const pauseSong = () => {
     if (playingSongInstance) {
       playingSongInstance.pause();
@@ -68,13 +103,15 @@ const Body = (props) => {
   };
 
   const onSongPositionChangeHandler = (value) => {
-    playingSongInstance.currentTime = value;
-    setSongPosition(value);
+    if (!isNaN(value)) {
+      playingSongInstance.currentTime = value;
+      setSongPosition(value);
+    }
   };
   return (
     <div className={classes.container}>
       {!!songs?.length ? (
-        <Grid container direction="row" justify="center">
+        <Grid container direction="row" justify="center" alignItems="stretch">
           {songs?.map((songItem) => (
             <Grid
               key={songItem.trackId}
@@ -82,7 +119,7 @@ const Body = (props) => {
                 onSongSelected(songItem);
               }}
               item
-              xs={12}
+              xs={10}
               md={12}
               lg={3}
               style={{ margin: 20 }}
@@ -91,7 +128,7 @@ const Body = (props) => {
                 isPlaying={
                   selectedSongToPlay?.previewUrl === songItem?.previewUrl
                 }
-                onSongPlay={onSongPlayHandler}
+                onSongPlay={onSingleCardPlay}
                 song={songItem}
               />
             </Grid>
@@ -117,6 +154,7 @@ const Body = (props) => {
           minMax={minMax}
         />
       )}
+      {/* )} */}
     </div>
   );
 };

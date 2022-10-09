@@ -24,9 +24,9 @@ function Controls(props) {
           <h2>{song?.collectionName}</h2>
           <span>{song?.shortDescription?.trim()}</span>
           <div style={{ display: "flex", marginTop: 10 }}>
-            <img className={classes.imgcls} src={song.artworkUrl60} />
-            <img className={classes.imgcls} src={song.artworkUrl100} />
-            <img className={classes.imgcls} src={song.artworkUrl30} />
+            <img className={classes.imgcls} src={song?.artworkUrl60} />
+            <img className={classes.imgcls} src={song?.artworkUrl100} />
+            <img className={classes.imgcls} src={song?.artworkUrl30} />
           </div>
         </div>
       )}

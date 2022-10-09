@@ -17,10 +17,11 @@ const HomePage = () => {
   useEffect(() => {
     (async () => {
       const songsRespnse = await getSongs(songFilter || dummyFavSong)
+      document.getElementById('main').scrollTo(0,0);
       setSongs(songsRespnse)
     }
     )()
-  }, [])
+  }, [songFilter])
 
   const onScrollHandler = async (e) => {
     const scrollHeight = e.target.scrollHeight;
@@ -42,7 +43,7 @@ const HomePage = () => {
   return (
     <div>
       <AppLayoutHeader />
-      <div onScroll={onScrollHandler} style={{ overflowY: 'auto', maxHeight: '100vh' }}>
+      <div id='main' onScroll={onScrollHandler} style={{ overflowY: 'auto', maxHeight: '100vh' }}>
         <Body songs={songs} />
         {showBottomLoader &&
           <center style={{ marginBottom: 20, height: 50 }}>

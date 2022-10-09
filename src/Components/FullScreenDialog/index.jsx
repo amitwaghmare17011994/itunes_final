@@ -12,7 +12,7 @@ import Controls from "./Controls";
 import { useStyles } from "./styles";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
+  return <Slide direction="down"   ref={ref} {...props} />;
 });
 
 export default function FullScreenDialog(props) {
@@ -25,9 +25,16 @@ export default function FullScreenDialog(props) {
     onSongPositionChange,
     minMax,
   } = props;
+
+  const [isOpen, setIsOpen] = useState(false);
   const [isPlay, setIsPlay] = useState(true);
   const classes = useStyles();
   const theme = useTheme();
+
+  // useEffect(() => {
+  //   setIsOpen(open);
+  // }, [open]);
+  
   const handleClose = () => {
     onClose();
   };
@@ -63,13 +70,13 @@ export default function FullScreenDialog(props) {
               onClick={handleClose}
               aria-label="close"
             >
-              <CloseIcon  />
+              <CloseIcon />
             </IconButton>
           </Toolbar>
         </AppBar>
         <div className={classes.detailCont}>
           <div className={classes.flex}>
-            <img className={classes.songImg} src={song.artworkUrl100} />
+            <img className={classes.songImg} src={song?.artworkUrl100} />
             <Hidden lgUp>
               <Controls
                 onSongPositionChange={onSongPositionChange}
